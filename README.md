@@ -1,3 +1,4 @@
- <!-- uses -->
- ## heroui
- ## 
+## TechUse
+- Next.js
+- tailwind.css
+- hero-ui
