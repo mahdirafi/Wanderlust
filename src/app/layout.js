@@ -1,10 +1,29 @@
-import { Josefin_Sans } from "next/font/google";
+import { Josefin_Sans, Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 
+// Site's existing base font — unchanged
 const josefin = Josefin_Sans({
   subsets: ["latin"],
+  variable: "--font-josefin",
+});
+
+// Added for the destination details page (and anywhere else you want them)
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-serif",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["500"],
+  variable: "--font-mono",
 });
 
 export const metadata = {
@@ -16,7 +35,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${josefin.className} h-full antialiased`}
+      className={`${josefin.variable} ${fraunces.variable} ${inter.variable} ${plexMono.variable} ${josefin.className} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" cz-shortcut-listen="true">
         <NavBar />

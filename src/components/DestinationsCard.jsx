@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { FiExternalLink } from 'react-icons/fi';
 
 const DestinationsCard = ({ destination }) => {
-  const { imageUrl, price, destinationName, duration, country } = destination;
+  const {_id , imageUrl, price, destinationName, duration, country } = destination;
 
   return (
     <Card className="group overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
@@ -52,7 +52,7 @@ const DestinationsCard = ({ destination }) => {
           </div>
         </div>
 
-        <Link href="/" className="mt-1 w-full">
+        <Link href={`/destination/${_id}`} className="mt-1 w-full">
           <Button
             variant="solid"
             color="primary"

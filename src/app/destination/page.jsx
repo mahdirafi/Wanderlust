@@ -1,3 +1,4 @@
+import React from 'react' ;
 import DestinationsCard from "@/components/DestinationsCard";
 
 const DestinationPage = async() =>{
