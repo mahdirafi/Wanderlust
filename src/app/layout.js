@@ -2,6 +2,7 @@ import { Josefin_Sans, Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import { Toaster } from 'react-hot-toast';
 
 // Site's existing base font — unchanged
 const josefin = Josefin_Sans({
@@ -39,7 +40,10 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col" cz-shortcut-listen="true">
         <NavBar />
-        <main>{children}</main>
+        <main>
+          {children} 
+           <Toaster position="top-center" />
+           </main>
         <Footer />
       </body>
     </html>
