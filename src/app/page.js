@@ -1,10 +1,11 @@
 import Banner from "@/components/Banner";
-import Image from "next/image";
+import DestinationPage from "./destination/page";
 
 export default function Home() {
   return (
      <>
         <Banner/>
+        <DestinationPage />
      </>
   );
 }

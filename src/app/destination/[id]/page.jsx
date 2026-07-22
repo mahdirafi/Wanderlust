@@ -1,15 +1,17 @@
 import { EditModal } from '@/components/EditModal';
-import { Button } from '@heroui/react';
+import { Button, Link } from '@heroui/react';
 import Image from 'next/image';
-import { Link } from "@heroui/react";
 
-import { BiArrowBack  } from 'react-icons/bi';
-import { FiMapPin, FiCalendar, FiCheck, FiArrowRight } from 'react-icons/fi';
+import Booking from '@/components/Booking';
 import { DeleteAlert } from '@/components/DeleteAlert';
+import { BiArrowBack } from 'react-icons/bi';
+import { FiCalendar, FiCheck, FiMapPin } from 'react-icons/fi';
 
 const DestinationDetailsPage = async ({ params }) => {
   const { id } = await params;
-  const res = await fetch(`http://localhost:5000/destination/${id}`, {
+  const res = await fetch(`http://localhost:5000/destination/${id}`,{
+    headers: { authorization: "logged in"}
+  } , {
     cache: 'no-store',
   });
   const destination = await res.json();
@@ -22,7 +24,7 @@ const DestinationDetailsPage = async ({ params }) => {
     duration,
     country,
     description,
-    highlights, // optional — array of strings, e.g. ["Luxury beachfront accommodation", ...]
+    highlights,  
   } = destination;
 
   return (
@@ -101,41 +103,8 @@ const DestinationDetailsPage = async ({ params }) => {
             </div>
           )}
         </div>
-
         {/* ---- right: sticky booking card ---- */}
-        <aside className="lg:col-span-1">
-          <div className="sticky top-8 rounded-2xl border border-[#0F2438]/10 p-6 shadow-[0_10px_30px_-15px_rgba(15,36,56,0.15)]">
-            <p className="text-xs uppercase tracking-wide text-[#0F2438]/50">
-              Starting from
-            </p>
-            <p className="mt-1 font-serif text-3xl font-semibold text-[#1B4B4F]">
-              ${price}
-            </p>
-            <p className="text-sm text-[#0F2438]/50">per person</p>
-
-            <input
-              type="date"
-              className="mt-5 w-full rounded-lg border border-[#0F2438]/10 bg-[#F5F1E8]/60 px-3 py-2.5 text-sm text-[#0F2438]/80 outline-none focus:ring-2 focus:ring-[#1B4B4F]/30"
-            />
-
-            <button className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-[#1B4B4F] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#153c3f]">
-              Book Now
-              <FiArrowRight size={16} />
-            </button>
-
-            <ul className="mt-5 space-y-2.5 border-t border-[#0F2438]/10 pt-5">
-              <li className="flex items-center gap-2 text-sm text-[#0F2438]/70">
-                <FiCheck className="mt-0.5 shrink-0 text-[#1B4B4F]" size={16} /> Free cancellation up to 7 days
-              </li>
-              <li className="flex items-center gap-2 text-sm text-[#0F2438]/70">
-                <FiCheck className="mt-0.5 shrink-0 text-[#1B4B4F]" size={16} /> Travel insurance included
-              </li>
-              <li className="flex items-center gap-2 text-sm text-[#0F2438]/70">
-                <FiCheck className="mt-0.5 shrink-0 text-[#1B4B4F]" size={16} /> 24/7 customer support
-              </li>
-            </ul>
-          </div>
-        </aside>
+        <Booking destination={destination} />
       </div>
     </div>
   );
