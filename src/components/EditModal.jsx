@@ -1,8 +1,8 @@
 "use client";
 
-import {Envelope} from "@gravity-ui/icons";
-import {  BiEditAlt } from 'react-icons/bi';
-import {Button,Select, FieldError, Input, Label, ListBox, Modal, Surface, TextField, TextArea, descriptionVariants} from "@heroui/react";
+import { Envelope } from "@gravity-ui/icons";
+import { Button, FieldError, Input, Label, ListBox, Modal, Select, Surface, TextArea, TextField } from "@heroui/react";
+import { BiEditAlt } from 'react-icons/bi';
 
 export function EditModal({destination}) {
   const {_id , imageUrl, price, destinationName, duration, category, description, country, departureDate } = destination;
@@ -14,7 +14,7 @@ export function EditModal({destination}) {
         // console.log(destinations);
 
 
-        const res = await fetch(`http://localhost:5000/destination/${_id}`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/destination/${_id}`,{
           method: 'PATCH',
           headers:{
             'Content-Type' : 'application/json'
