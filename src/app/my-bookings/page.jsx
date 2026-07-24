@@ -1,9 +1,9 @@
 import { BookingCancelAlert } from "@/components/BookingCancelAlert";
 import { auth } from "@/lib/auth";
 import { Button } from "@heroui/react";
+import { Fraunces, IBM_Plex_Mono, Inter } from "next/font/google";
 import { headers } from "next/headers";
 import Image from "next/image";
-import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
 import { FiCalendar, FiCheck, FiMapPin } from "react-icons/fi";
 
 const fraunces = Fraunces({
@@ -28,7 +28,15 @@ const BookingPageDetails = async () => {
     });
     const user = session?.user;
 
-    const res = await fetch(`http://localhost:5000/booking/${user?.id}`, {
+     const {token} = await auth.api.getToken({
+        headers: await headers()
+      });
+
+    const res = await fetch(`http://localhost:5000/booking/${user?.id}`,{
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    }, {
         cache: "no-store",
     });
     const bookings = await res.json();

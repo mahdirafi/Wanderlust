@@ -11,14 +11,11 @@ const Booking = ({ destination }) => {
         const user = session?.user
         console.log(user);
 
-
     const {_id,imageUrl,price,destinationName,duration,country,description} = destination;
     console.log(destination);
 
     const [departureData, setDepartureDate] = useState(null);
     console.log(new Date(departureData));
-
-    
 
     const handleBooking = async() =>{
       const bookingData = {
@@ -32,13 +29,19 @@ const Booking = ({ destination }) => {
         imageUrl,
         country,
         departureDate: new Date(departureData)
-
       };
-      console.log(Booking)
+      console.log(Booking);
+
+
+// client components token access
+      const {data:tokenData} =await authClient.token()
+     
+
     const res = await fetch("http://localhost:5000/booking" , {
       method: "POST",
       headers: {
-        'content-type' : 'application/json'
+        'content-type' : 'application/json',
+        authorization: `Bearer ${tokenData?.token}`
       },
       body:JSON.stringify(bookingData)
     })

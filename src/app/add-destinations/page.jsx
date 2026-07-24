@@ -1,6 +1,6 @@
 'use client'
-import { FieldError,ListBox,Select, Input, Label, TextField, TextArea, Button, Card } from '@heroui/react';
-import React from 'react';
+import { authClient } from '@/lib/auth-client';
+import { Button, Card, FieldError, Input, Label, ListBox, Select, TextArea, TextField } from '@heroui/react';
 
 const AddDestinationsPage = () => {
     const OnSubmit = async(e) =>{
@@ -9,11 +9,17 @@ const AddDestinationsPage = () => {
         const destinations = Object.fromEntries(formData.entries());
         console.log(destinations);
 
+        // client components token access
+      const {data:tokenData} =await authClient.token()
+
 
         const res = await fetch('http://localhost:5000/destination',{
           method: 'POST',
           headers:{
-            'Content-Type' : 'application/json'
+            'Content-Type' : 'application/json',
+            headers: {
+              authorization: `Bearer ${token}`
+            },
           },
           body:JSON.stringify(destinations)
         })

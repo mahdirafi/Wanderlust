@@ -4,13 +4,20 @@ import Image from 'next/image';
 
 import Booking from '@/components/Booking';
 import { DeleteAlert } from '@/components/DeleteAlert';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import { BiArrowBack } from 'react-icons/bi';
 import { FiCalendar, FiCheck, FiMapPin } from 'react-icons/fi';
 
 const DestinationDetailsPage = async ({ params }) => {
   const { id } = await params;
+  const {token} = await auth.api.getToken({
+    headers: await headers()
+  })
+  console.log(token);
+
   const res = await fetch(`http://localhost:5000/destination/${id}`,{
-    headers: { authorization: "logged in"}
+    headers: { authorization: `Bearer ${token}`}
   } , {
     cache: 'no-store',
   });
